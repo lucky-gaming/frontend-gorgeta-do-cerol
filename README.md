@@ -1,2 +1,20 @@
 # 4fly-front
-Projeto do Front End usando VueJS
+- Micro serviço responsável pelo Font End
+
+
+**Pré-requisitos**
+  - NodeJS versão >= 22
+  - Nuxt
+  - Axios
+
+  - MySQL
+  - Redis
+
+
+**Recomendação de padrões**
+
+
+**Como executar o App**
+
+
+
