@@ -11,7 +11,7 @@
   - Redis
 
 
-**Recomendação de padrões**
+**Recomendação e padrões utilizados**
 
 
 **Como executar o App**
