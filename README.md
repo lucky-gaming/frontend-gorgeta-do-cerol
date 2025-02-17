@@ -10,7 +10,7 @@
 
 ### **Arquitetura Geral do Frontend (VueJS + Nuxt.js)**
 
-O **Nuxt.js** será usado para estruturar o aplicativo de forma eficiente, com seu suporte integrado para renderização no lado do servidor (SSR) e criação de Single Page Applications (SPA). A ideia é que seu frontend seja ágil, responsivo e seguro, enquanto se comunica com os micro-serviços do backend para realizar transações de criptomoedas, gerenciamento de jogos, e outras funcionalidades críticas.
+O **Nuxt.js** é usado para estruturar o aplicativo de forma eficiente, com seu suporte integrado para renderização no lado do servidor (SSR) e criação de Single Page Applications (SPA). A ideia é que seu frontend seja ágil, responsivo e seguro, enquanto se comunica com os micro-serviços do backend para realizar transações de criptomoedas, gerenciamento de jogos, e outras funcionalidades críticas.
 
 Aqui estão os principais componentes a serem implementados no seu **crypto cassino**:
 
