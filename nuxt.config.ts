@@ -5,6 +5,25 @@ export default defineNuxtConfig({
   srcDir: "src/",
   css: ["~/assets/css/global.css"],
   modules: ["@nuxtjs/tailwindcss", "@nuxtjs/i18n", "@pinia/nuxt"],
+  app: {
+    head: {
+      link: [
+        {
+          href: "https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap",
+          rel: "stylesheet",
+        },
+        {
+          href: "https://fonts.gstatic.com",
+          rel: "preconnect",
+          crossorigin: "anonymous",
+        },
+        {
+          href: "https://fonts.googleapis.com",
+          rel: "preconnect",
+        },
+      ],
+    },
+  },
   i18n: {
     locales: [
       {

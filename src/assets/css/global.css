@@ -1,1 +1,6 @@
 @import "./tailwind.css";
+
+body {
+  background: #1c1510;
+  font-family: "Figtree", sans-serif;
+}
