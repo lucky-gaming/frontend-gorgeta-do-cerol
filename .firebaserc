@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "gorgeta-do-cerol"
-  }
+  },
+  "targets": {
+    "gorgeta-do-cerol": {
+      "hosting": {
+        "gorgeta-do-cerol": [
+          "gorgeta-do-cerol"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

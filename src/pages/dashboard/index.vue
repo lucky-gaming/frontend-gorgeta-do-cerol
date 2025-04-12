@@ -3,7 +3,7 @@
     <div class="flex flex-col px-20 w-full gap-8 justify-center h-full py-10">
       <div class="h-full w-full flex flex-col justify-center">
         <div class="flex flex-col gap-8">
-          <img src="/logo.svg" alt="Logo" class="w-32" />
+          <img src="/Logo.svg" alt="Logo" class="w-32" />
           <div class="flex flex-col gap-3">
             <span
               class="text-[96px] text-white font-bold tracking-tighter leading-[120%]"

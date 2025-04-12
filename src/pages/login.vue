@@ -111,7 +111,7 @@ onMounted(() => {
 
 <style scoped>
 .customBg {
-  background-image: url("logo.svg");
+  background-image: url("/Logo.svg");
   background-repeat: repeat;
   background-size: 100px 80px;
   animation: fade 5s infinite alternate-reverse;
