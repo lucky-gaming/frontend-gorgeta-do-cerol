@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full h-screen items-stretch">
+  <div class="flex w-full h-screen items-stretch overflow-hidden">
     <div class="flex flex-col px-20 w-full gap-8 justify-center h-full py-10">
       <div class="h-full w-full flex flex-col justify-center">
         <div class="flex flex-col gap-8">
@@ -83,9 +83,9 @@
         <img
           src="/aside2.svg"
           alt="Hero"
-          class="absolute -top-16 -left-20 max-w-[200px]"
+          class="absolute -top-10 -left-16 max-w-[200px]"
         />
-        <img src="/hero.png" alt="Hero" class="max-h-[550px]" />
+        <img src="/hero.png" alt="Hero" class="max-h-[650px]" />
         <img
           src="/ticket.svg"
           alt="Ticket"
@@ -94,7 +94,7 @@
         <img
           src="/aside.svg"
           alt="Hero"
-          class="absolute -bottom-10 -right-10 max-w-[150px]"
+          class="absolute -bottom-0 -right-6 max-w-[150px]"
         />
       </div>
     </div>
