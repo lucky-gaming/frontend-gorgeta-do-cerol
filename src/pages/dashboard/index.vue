@@ -103,7 +103,7 @@
 </template>
 
 <script lang="ts" setup>
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
 const email = ref("");
 const emailInvalid = ref(false);
 const tipValue = ref(0);
@@ -120,8 +120,8 @@ const handleObjectToCreate = () => {
   return {
     email: email.value,
     tipValue: tipValue.value,
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
+    created_at: Timestamp.now(),
+    updated_at: Timestamp.now(),
     done: false,
   };
 };
