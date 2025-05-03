@@ -78,7 +78,7 @@ const login = async () => {
   error.value = false;
   if (
     form.value.username === "cerol@4win" &&
-    form.value.password === "C3R0L@4W1N"
+    form.value.password === "5afbb2MrYJ8pXsDk"
   ) {
     localStorage.setItem("lastLogin", new Date().toISOString());
     router.push("/dashboard");
