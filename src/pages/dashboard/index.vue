@@ -18,10 +18,10 @@
           <div class="flex items-stretch gap-4">
             <div class="flex flex-col gap-1 w-full max-w-[300px]">
               <input
-                type="email"
+                type="text"
                 v-model="email"
                 class="bg-[#140D0B] rounded-lg px-4 py-2 text-white border border-transparent placeholder:text-white h-[56px] focus:border-[#FF7700] focus:outline-none focus:ring-0"
-                placeholder="Email"
+                placeholder="Email, CPF ou ID"
                 :class="{
                   'border-red-500': emailInvalid && email.length > 0,
                   'opacity-80': sending,
@@ -29,7 +29,7 @@
                 @input="emailInvalid = false"
               />
               <span v-if="emailInvalid" class="text-red-500 text-xs">
-                Email inválido
+                {{ currentType }} inválido
               </span>
             </div>
             <input
@@ -111,14 +111,44 @@ const sending = ref(false);
 const sent = ref(false);
 const { $firebase } = useNuxtApp();
 
+const currentType = computed(() => {
+  if (tipValue.value <= 0) return "Valor";
+  switch (checkValueType()) {
+    case "email":
+      return "Email";
+    case "cpf":
+      return "CPF";
+    case "id":
+      return "ID";
+    default:
+      return "Valor";
+  }
+});
+
 const reset = () => {
   email.value = "";
   tipValue.value = 0;
 };
 
 const handleObjectToCreate = () => {
+  var finalValue = "";
+
+  switch (checkValueType()) {
+    case "email":
+      finalValue = email.value;
+      break;
+    case "cpf":
+      finalValue = email.value.replace(/[^\d]+/g, "");
+      break;
+    case "id":
+      finalValue = email.value.replace(/[^\d]+/g, "");
+      break;
+    default:
+      finalValue = email.value;
+  }
+
   return {
-    email: email.value,
+    email: finalValue.toString().trim(),
     tipValue: tipValue.value,
     created_at: Timestamp.now(),
     updated_at: Timestamp.now(),
@@ -126,19 +156,54 @@ const handleObjectToCreate = () => {
   };
 };
 
+const checkValueType = () => {
+  if (email.value.includes("@")) {
+    return "email";
+  } else if (
+    email.value.toString().match(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/) ||
+    email.value.toString().match(/^\d{11}$/)
+  ) {
+    return "cpf";
+  } else if (email.value.length > 0 && !isNaN(Number(email.value))) {
+    return "id";
+  } else {
+    return "email";
+  }
+};
+
 const isEmailValid = (email: string) => {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(email);
 };
 
+const handleValidation = () => {
+  if (!email.value.length) {
+    emailInvalid.value = true;
+    return false;
+  }
+  if (tipValue.value <= 0) {
+    emailInvalid.value = true;
+    return false;
+  }
+  const valueType = checkValueType();
+  if (valueType === "email" && !isEmailValid(email.value)) {
+    emailInvalid.value = true;
+    return false;
+  } else if (valueType === "cpf" && !isCPFValid(email.value)) {
+    emailInvalid.value = true;
+    return false;
+  } else if (valueType === "id" && email.value.length < 3) {
+    emailInvalid.value = true;
+    return false;
+  }
+
+  return true;
+};
+
 const sendEmail = async () => {
   emailInvalid.value = false;
   sent.value = false;
-  if (!isEmailValid(email.value)) {
-    emailInvalid.value = true;
-    // Show error message for invalid email
-    return;
-  }
+  if (!handleValidation()) return;
   sending.value = true;
   try {
     const docRef = await addDoc(

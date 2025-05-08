@@ -4,11 +4,11 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "set ENV=dev && nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "deploy": "nuxt generate && firebase deploy --only hosting"
+    "deploy": "set ENV=prod && nuxt generate && firebase deploy --only hosting"
   },
   "dependencies": {
     "@nuxtjs/i18n": "^9.2.1",

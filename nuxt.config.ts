@@ -44,4 +44,9 @@ export default defineNuxtConfig({
     vueI18n: "./i18n.config.ts",
     strategy: "no_prefix",
   },
+  runtimeConfig: {
+    public: {
+      env: process.env.ENV,
+    },
+  },
 });
