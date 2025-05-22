@@ -78,7 +78,7 @@ const login = async () => {
   error.value = false;
   if (
     form.value.username === "cerol@4win" &&
-    form.value.password === "5afbb2MrYJ8pXsDk"
+    form.value.password === useRuntimeConfig().public.password.toString().trim()
   ) {
     localStorage.setItem("lastLogin", new Date().toISOString());
     router.push("/dashboard");
@@ -97,7 +97,7 @@ const handleInputInitialValues = () => {
   form.value.password =
     useRuntimeConfig().public.env.toString().trim() === "prod"
       ? ""
-      : "5afbb2MrYJ8pXsDk";
+      : useRuntimeConfig().public.password.toString().trim();
 };
 
 onMounted(() => {

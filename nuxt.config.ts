@@ -47,6 +47,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       env: process.env.ENV,
+      password: process.env.PASSWORD,
     },
   },
 });

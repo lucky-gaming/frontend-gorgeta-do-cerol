@@ -172,10 +172,19 @@ const handleValidation = () => {
     return false;
   }
   const valueType = checkValueType();
-  if (valueType === "email" && !isEmailValid(email.value)) {
+  // if (valueType === "email" && !isEmailValid(email.value)) {
+  //   emailInvalid.value = true;
+  //   return false;
+  // } else if (valueType === "cpf" && !isCPFValid(email.value)) {
+  //   emailInvalid.value = true;
+  //   return false;
+  // }
+  if (valueType === "cpf" && !isCPFValid(email.value)) {
     emailInvalid.value = true;
     return false;
-  } else if (valueType === "cpf" && !isCPFValid(email.value)) {
+  }
+
+  if (valueType === "email" && email.value.length < 5) {
     emailInvalid.value = true;
     return false;
   }
