@@ -44,15 +44,16 @@
         </div>
         <button
           type="submit"
-          class="w-full p-2 bg-primary text-white rounded-lg font-semibold relative overflow-hidden"
+          class="w-full p-2 bg-primary text-white rounded-lg font-semibold relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
           @mouseover="showSliver = true"
           @mouseleave="showSliver = false"
+          :disabled="logging"
         >
           <div
             class="w-[16px] -skew-x-12 top-0 h-full bg-white/50 absolute sliver"
             v-if="showSliver"
           ></div>
-          <span> Login </span>
+          <span> {{ logging ? "Logging" : "Login" }} </span>
         </button>
       </form>
     </div>
@@ -72,32 +73,50 @@ const form = ref({
 
 const showSliver = ref(false);
 const error = ref(false);
+const logging = ref(false);
 const usernameInput = ref<HTMLElement | null>(null);
 
 const login = async () => {
   error.value = false;
-  if (
-    form.value.username === "cerol@4win" &&
-    form.value.password === useRuntimeConfig().public.password.toString().trim()
-  ) {
+  logging.value = true;
+  try {
+    const res = await useFetch(
+      "https://33uhao7ypf.execute-api.eu-west-2.amazonaws.com/login",
+      {
+        method: "POST",
+        body: {
+          username: form.value.username,
+          password: form.value.password,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (res.data.value && (res.data.value as any).success !== true) {
+      throw new Error("Login failed");
+    }
     localStorage.setItem("lastLogin", new Date().toISOString());
     router.push("/dashboard");
-  } else {
+  } catch (err) {
     error.value = true;
     await nextTick(); // Garante que a DOM foi atualizada antes de mover o foco
     usernameInput.value?.focus();
+    console.error("Erro ao fazer login:", err);
+  } finally {
+    logging.value = false;
   }
 };
 
 const handleInputInitialValues = () => {
-  form.value.username =
-    useRuntimeConfig().public.env.toString().trim() === "prod"
-      ? ""
-      : "cerol@4win";
-  form.value.password =
-    useRuntimeConfig().public.env.toString().trim() === "prod"
-      ? ""
-      : useRuntimeConfig().public.password.toString().trim();
+  if (process.client) {
+    form.value.username =
+      useRuntimeConfig().public.env.toString().trim() === "prod"
+        ? ""
+        : "cerol@4win";
+    form.value.password =
+      useRuntimeConfig().public.env.toString().trim() === "prod" ? "" : "";
+  }
 };
 
 onMounted(() => {
